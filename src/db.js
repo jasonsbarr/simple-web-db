@@ -50,6 +50,10 @@ export class DB {
     this.setTable(table, t);
   }
 
+  get(table, finder) {
+    return this._data[table].find(finder);
+  }
+
   getMeta(key) {
     return this._data[key];
   }
