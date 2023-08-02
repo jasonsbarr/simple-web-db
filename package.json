@@ -2,6 +2,10 @@
   "name": "@jasonsbarr/simple-web-db",
   "version": "1.0.0",
   "description": "A simple db built on LocalStorage for educational use",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
