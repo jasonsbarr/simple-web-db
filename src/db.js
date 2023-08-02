@@ -59,7 +59,7 @@ export class DB {
   }
 
   save() {
-    localStorage.setItem("data", JSON.stringify(this.data));
+    localStorage.setItem("data", JSON.stringify(this._data));
   }
 
   setMeta(key, item) {
