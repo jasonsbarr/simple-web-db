@@ -1,14 +1,31 @@
 export class DB {
   constructor(data = {}) {
     if (localStorage.getItem("data")) {
-      this.data = JSON.parse(localStorage.getItem("data"));
+      this._data = JSON.parse(localStorage.getItem("data"));
     } else {
-      this.data = data;
+      this._data = data;
     }
   }
 
   static create(data = {}) {
     return new DB(data);
+  }
+
+  get data() {
+    return this._data;
+  }
+
+  add(table, item) {
+    const t = this.getTable(table);
+    t.push(item);
+    this.save();
+  }
+
+  delete(table, pred) {
+    let t = this.getTable(table);
+    t = t.filter((item) => !pred(item));
+    this._data[table] = t;
+    this.save();
   }
 
   /**
