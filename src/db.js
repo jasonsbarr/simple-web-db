@@ -18,7 +18,7 @@ export class DB {
   }
 
   add(table, item) {
-    const t = this.getTable(table);
+    let t = this.getTable(table);
     let toAdd;
     if (typeof item === "object") {
       toAdd = { ...item, id: createId() };
@@ -32,26 +32,15 @@ export class DB {
   delete(table, pred) {
     let t = this.getTable(table);
     t = t.filter((item) => !pred(item));
-    this._data[table] = t;
-    this.save();
+    this.setTable(table, t);
   }
 
-  /**
-   * For getting a meta-field from the DB
-   * @param {string} key
-   * @returns {any}
-   */
   getMeta(key) {
-    return this.data[key];
+    return this._data[key];
   }
 
-  /**
-   * For getting a DB table, which is an array, by name
-   * @param {string} tableName
-   * @returns {any[]}
-   */
   getTable(tableName) {
-    return this.data[tableName];
+    return this._data[tableName];
   }
 
   save() {
@@ -59,12 +48,21 @@ export class DB {
   }
 
   setMeta(key, item) {
-    this.data[key] = item;
+    this._data[key] = item;
     this.save();
   }
 
   setTable(key, array) {
-    this.data[key] = array;
+    this._data[key] = array;
     this.save();
+  }
+
+  update(table, finder, updated) {
+    let t = this._data[table];
+    let i = t.findIndex(finder);
+    if (i > -1) {
+      let newTable = [...t.slice(0, i), { ...t[i], ...updated }, ...t.slice(i)];
+      this.setTable(table, newTable);
+    }
   }
 }
