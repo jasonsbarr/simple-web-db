@@ -34,5 +34,8 @@
   "devDependencies": {
     "microbundle": "^0.15.1",
     "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.1"
   }
 }
