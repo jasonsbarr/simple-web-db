@@ -6,7 +6,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "index.js",
+  "main": "./dist/index.cjs",
+  "source": "./src/index.js",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.js"
+  },
+  "module": "./dist/index.esm.js",
+  "unpkg": "./dist/index.umd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/jasonsbarr/simple-web-db/issues"
   },
-  "homepage": "https://github.com/jasonsbarr/simple-web-db#readme"
+  "homepage": "https://github.com/jasonsbarr/simple-web-db#readme",
+  "devDependencies": {
+    "microbundle": "^0.15.1"
+  }
 }
