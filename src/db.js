@@ -1,3 +1,5 @@
+import { createId } from "@paralleldrive/cuid2";
+
 export class DB {
   constructor(data = {}) {
     if (localStorage.getItem("data")) {
@@ -17,7 +19,13 @@ export class DB {
 
   add(table, item) {
     const t = this.getTable(table);
-    t.push(item);
+    let toAdd;
+    if (typeof item === "object") {
+      toAdd = { ...item, id: createId() };
+    } else {
+      toAdd = { value: item, id: createId() };
+    }
+    t.push(toAdd);
     this.save();
   }
 
