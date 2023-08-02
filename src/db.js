@@ -20,7 +20,7 @@ export class DB {
   add(table, item) {
     let t = this.getTable(table);
     let toAdd;
-    if (typeof item === "object") {
+    if (typeof item === "object" && !Array.isArray(item)) {
       toAdd = { ...item, id: createId() };
     } else {
       toAdd = { value: item, id: createId() };
