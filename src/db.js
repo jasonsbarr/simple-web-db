@@ -3,7 +3,12 @@ import { createId } from "@paralleldrive/cuid2";
 export class DB {
   constructor(data = {}) {
     if (localStorage.getItem("data")) {
-      this._data = JSON.parse(localStorage.getItem("data"));
+      this._data = JSON.parse(localStorage.getItem("data"), (key, value) => {
+        if (key.toLowerCase().includes("date")) {
+          return new Date(value);
+        }
+        return value;
+      });
     } else {
       this._data = data;
     }
@@ -21,9 +26,19 @@ export class DB {
     let t = this.getTable(table);
     let toAdd;
     if (typeof item === "object" && !Array.isArray(item)) {
-      toAdd = { ...item, id: createId() };
+      toAdd = {
+        ...item,
+        id: createId(),
+        createdDate: new Date(),
+        updatedDate: new Date(),
+      };
     } else {
-      toAdd = { value: item, id: createId() };
+      toAdd = {
+        value: item,
+        id: createId(),
+        createdDate: new Date(),
+        updatedDate: new Date(),
+      };
     }
     t.push(toAdd);
     this.save();
@@ -61,7 +76,11 @@ export class DB {
     let t = this._data[table];
     let i = t.findIndex(finder);
     if (i > -1) {
-      let newTable = [...t.slice(0, i), { ...t[i], ...updated }, ...t.slice(i)];
+      let newTable = [
+        ...t.slice(0, i),
+        { ...t[i], ...updated, updatedDate: new Date() },
+        ...t.slice(i),
+      ];
       this.setTable(table, newTable);
     }
   }
