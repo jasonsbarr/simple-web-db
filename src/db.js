@@ -12,15 +12,6 @@ export class DB {
   }
 
   /**
-   * For getting a DB table, which is an array, by name
-   * @param {string} tableName
-   * @returns {any[]}
-   */
-  getTable(tableName) {
-    return this.data[tableName];
-  }
-
-  /**
    * For getting a meta-field from the DB
    * @param {string} key
    * @returns {any}
@@ -29,7 +20,26 @@ export class DB {
     return this.data[key];
   }
 
+  /**
+   * For getting a DB table, which is an array, by name
+   * @param {string} tableName
+   * @returns {any[]}
+   */
+  getTable(tableName) {
+    return this.data[tableName];
+  }
+
   save() {
     localStorage.setItem("data", JSON.stringify(this.data));
+  }
+
+  setMeta(key, item) {
+    this.data[key] = item;
+    this.save();
+  }
+
+  setTable(key, array) {
+    this.data[key] = array;
+    this.save();
   }
 }
