@@ -1,0 +1,23 @@
+{
+  "name": "@jasonsbarr/simple-web-db",
+  "version": "1.0.0",
+  "description": "A simple db built on LocalStorage for educational use",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jasonsbarr/simple-web-db.git"
+  },
+  "keywords": [
+    "db",
+    "localstorage"
+  ],
+  "author": "Jason Barr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jasonsbarr/simple-web-db/issues"
+  },
+  "homepage": "https://github.com/jasonsbarr/simple-web-db#readme"
+}
