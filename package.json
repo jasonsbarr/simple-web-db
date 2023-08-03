@@ -1,6 +1,6 @@
 {
   "name": "@jasonsbarr/simple-web-db",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple db built on LocalStorage for educational use",
   "type": "module",
   "publishConfig": {
