@@ -3,7 +3,7 @@ import { createId } from "@paralleldrive/cuid2";
 export class DB {
   constructor(data = {}, { dbName = "data" } = {}) {
     this._dbName = dbName;
-    if (localStorage.getItem("data")) {
+    if (localStorage.getItem(this._dbName)) {
       this._data = JSON.parse(
         localStorage.getItem(this._dbName),
         (key, value) => {
