@@ -1,14 +1,18 @@
 import { createId } from "@paralleldrive/cuid2";
 
 export class DB {
-  constructor(data = {}) {
+  constructor(data = {}, { dbName = "data" } = {}) {
+    this._dbName = dbName;
     if (localStorage.getItem("data")) {
-      this._data = JSON.parse(localStorage.getItem("data"), (key, value) => {
-        if (key.toLowerCase().includes("date")) {
-          return new Date(value);
-        }
-        return value;
-      });
+      this._data = JSON.parse(
+        localStorage.getItem(this._dbName),
+        (key, value) => {
+          if (key.toLowerCase().includes("date")) {
+            return new Date(value);
+          }
+          return value;
+        },
+      );
     } else {
       this._data = data;
     }
@@ -63,7 +67,7 @@ export class DB {
   }
 
   save() {
-    localStorage.setItem("data", JSON.stringify(this._data));
+    localStorage.setItem(this._dbName, JSON.stringify(this._data));
   }
 
   setMeta(key, item) {
