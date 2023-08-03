@@ -18,8 +18,8 @@ export class DB {
     }
   }
 
-  static create(data = {}) {
-    return new DB(data);
+  static create(data = {}, { dbName = "data" } = {}) {
+    return new DB(data, { dbName });
   }
 
   get data() {
