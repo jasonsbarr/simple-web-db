@@ -48,6 +48,10 @@ export class DB {
     this.save();
   }
 
+  addTable(name) {
+    this._data[name] = [];
+  }
+
   delete(table, pred) {
     let t = this.getTable(table);
     t = t.filter((item) => !pred(item));
