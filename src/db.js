@@ -1,7 +1,7 @@
 import { createId } from "@paralleldrive/cuid2";
 
 export class DB {
-  constructor(data = {}, { dbName = "data" } = {}) {
+  constructor({ data = {}, dbName = "data" } = {}) {
     this._dbName = dbName;
     if (localStorage.getItem(this._dbName)) {
       this._data = JSON.parse(
@@ -18,7 +18,7 @@ export class DB {
     }
   }
 
-  static create(data = {}, { dbName = "data" } = {}) {
+  static create({ data = {}, dbName = "data" } = {}) {
     return new DB(data, { dbName });
   }
 
